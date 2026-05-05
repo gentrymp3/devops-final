@@ -21,21 +21,36 @@ def menu():
     print("7. d100")
     print("Enter Q to quit")
 
-def roll_die(sides, count):
-    rolls = [roll_dice(sides) for _ in range(count)]
-    return rolls, sum(rolls)
-
 while True:
     menu()
     choice = input("Pick your poison: ")
+
     if choice == "Q":
+        print("Closing menu...")
         break
+
     if choice not in DICE:
         print("Invalid choice")
         continue
+    
+    try:
+        count = int(input("How many dice? "))
+    except ValueError:
+        print("Invalid number.")
+        continue
 
-    count = int(input("How many dice? "))
-    rolls, total = roll_dice(DICE[choice], count)
+    mod_input = input("Add Modifier: (3, -2, etc. Enter 0 for none)")
+    
+    try:
+        modifier = int(mod_input) if mod_input else 0
+    except ValueError:
+        print("Invalid modifier.")
+        continue
 
-    print("Rolls:", rolls)
-    print("Total:", total)
+    rolls, total = roll_dice(DICE[choice], count, modifier)
+
+    sign = "+" if modifier >= 0 else ""
+
+    print("\nRolls:", rolls)
+    print("Modifier:", modifier)
+    print("Total:", total, "\n")
