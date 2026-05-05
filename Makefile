@@ -2,7 +2,7 @@ install:
 	pip install -r requirements.txt
 
 test:
-	pytest -v
+	PYTHONPATH=. pytest -v
 
 run:
 	python main.py
