@@ -1,7 +1,5 @@
 from app.roller import roll_dice
 
 def test_modifier_addition():
-    rolls = [1,1]
-    modifier = 3
-    total = sum(rolls) + modifier
+    rolls, total = roll_dice(1, 2, 3)
     assert total == 5
